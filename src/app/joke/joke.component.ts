@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JokeService } from '../joke.service';
 import { JokerService } from '../joker.service';
 
 @Component({
@@ -9,6 +8,7 @@ import { JokerService } from '../joker.service';
                 <h5 id="title">{{title | capitalize}}</h5>
                 <h6>{{joke}}</h6>
                 <button id="mybtn" class="btn btn-primary btn-lg" (click)="getJoke()">Get next joke</button>
+                <button id="mybtn" class="btn btn-primary btn-lg" (click)="postJson()">Get Post</button>
               </div>
             `
 })
@@ -28,4 +28,8 @@ export class JokeComponent implements OnInit {
       .subscribe(joke => this.joke = joke);
   }
 
+  postJson() {
+    this.jokerService.postJson()
+      .subscribe(info => console.log(info));
+  }
 }

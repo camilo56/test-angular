@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { JokeService } from './joke.service';
 
 @Component({
   selector: 'app-root',
