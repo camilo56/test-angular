@@ -8,7 +8,7 @@ import { JokerService } from '../joker.service';
 })
 export class ListTestComponent implements OnInit {
   users: any[];
-  getUser: string;
+  selectedUser: string;
 
   constructor(private jokerService: JokerService) {
   }
@@ -16,11 +16,17 @@ export class ListTestComponent implements OnInit {
   ngOnInit() {
     this.jokerService.getUsers().subscribe(data => {
       this.users = data;
-      this.getUser = this.users[0].name;
+      this.selectedUser = this.users[0].name;
     });
   }
 
   selected(user: string) {
-    this.getUser = user;
+    this.selectedUser = user;
+  }
+
+  getUser(user: number) {
+    this.jokerService.getUser(1).subscribe(data => {
+      this.selectedUser = data.name;
+    });
   }
 }

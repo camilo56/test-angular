@@ -32,6 +32,11 @@ export class JokerService {
       .map(response => response.json());
   }
 
+  getUser(id: number): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/users/' + id)
+      .map(response => response.json());
+  }
+
   makeHeaders() {
     const headers = new Headers();
     headers.append('API-TOKEN', 'Camilo1991');

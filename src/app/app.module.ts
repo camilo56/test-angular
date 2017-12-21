@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { JokeComponent } from './joke/joke.component';
@@ -9,6 +10,7 @@ import { JokerService } from './joker.service';
 import { TestComponent } from './test/test.component';
 import { UserTestComponent } from './user-test/user-test.component';
 import { ListTestComponent } from './list-test/list-test.component';
+import { FormTestComponent } from './form-test/form-test.component';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,14 @@ import { ListTestComponent } from './list-test/list-test.component';
     CapitalizePipe,
     TestComponent,
     UserTestComponent,
-    ListTestComponent
+    ListTestComponent,
+    FormTestComponent
   ],
   imports: [
+    HttpModule,
+    FormsModule,
     BrowserModule,
-    HttpModule
+    ReactiveFormsModule
   ],
   providers: [JokerService],
   bootstrap: [AppComponent]

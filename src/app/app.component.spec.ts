@@ -9,6 +9,8 @@ import { TestBed, async, ComponentFixture} from '@angular/core/testing';
 import { TestComponent } from './test/test.component';
 import { UserTestComponent } from './user-test/user-test.component';
 import { ListTestComponent } from './list-test/list-test.component';
+import { FormTestComponent } from './form-test/form-test.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 describe('hello camilo', () => {
   let component: AppComponent;
@@ -18,9 +20,9 @@ describe('hello camilo', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
+      imports: [HttpModule, ReactiveFormsModule, FormsModule],
       declarations: [JokeComponent, TestComponent, UserTestComponent, ListTestComponent,
-                    AppComponent, CapitalizePipe],
+                    AppComponent, CapitalizePipe, FormTestComponent],
       providers: [JokerService]
     }).compileComponents();
   }));

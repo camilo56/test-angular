@@ -1,0 +1,39 @@
+<div class="ui raised segment">
+  <h2 class="ui header">Demo Form: Sku {{ testFormName.value }}</h2>
+  <form class="ui form"
+        [formGroup]="testForm"
+        (ngSubmit)="onSubmit(testForm.value)">
+    <div class="field" [class.error]="testFormField.invalid && testFormField.touched">
+      <label for="filed">SKU</label>
+      <input type="text"
+            id="filed"
+            placeholder="SKU"
+            name="sku" 
+            autocomplete="off"
+            [formControl]="testFormField">
+      <div class="ui message" *ngIf="testFormField.dirty && testFormField.hasError('required')">
+        SKU is required
+      </div>
+      <div class="ui message" *ngIf="testFormField.dirty && testFormField.hasError('invalid')">
+        SKU is invalid
+      </div>
+    </div>
+
+    <div class="field" [class.error]="testFormName.invalid && testFormName.dirty">
+      <label for="name">Name</label>
+      <input type="text"
+            id="name"
+            placeholder="name"
+            name="name"
+            [formControl]="testFormName">
+      <div class="ui message" *ngIf="testFormName.dirty && testFormName.hasError('required')">
+        name is required
+      </div>
+      <div class="ui message" *ngIf="testFormName.dirty && testFormName.hasError('invalid')">
+        name is invalid
+      </div>
+    </div>
+    
+    <button type="submit" class="ui button">Submit</button>
+  </form>
+</div>

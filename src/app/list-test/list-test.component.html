@@ -1,2 +1,2 @@
-<h1>{{getUser}}</h1>
+<h1>{{selectedUser}}</h1>
 <app-user-test *ngFor="let user of users" [user]="user.name" (throwEvent)="selected($event)"></app-user-test>
