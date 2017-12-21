@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { CapitalizePipe } from './capitalize.pipe';
 import { JokeComponent } from './joke/joke.component';
 import { TestBed, async, ComponentFixture} from '@angular/core/testing';
+import { TestComponent } from './test/test.component';
+import { UserTestComponent } from './user-test/user-test.component';
+import { ListTestComponent } from './list-test/list-test.component';
 
 describe('hello camilo', () => {
-
   let component: AppComponent;
   let element: DebugElement;
   let fixture: ComponentFixture<AppComponent>;
@@ -17,7 +19,8 @@ describe('hello camilo', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      declarations: [JokeComponent, AppComponent, CapitalizePipe],
+      declarations: [JokeComponent, TestComponent, UserTestComponent, ListTestComponent,
+                    AppComponent, CapitalizePipe],
       providers: [JokerService]
     }).compileComponents();
   }));
@@ -30,6 +33,10 @@ describe('hello camilo', () => {
 
   it('be true', () => {
     expect(expected).toBe(true);
+  });
+
+  it('should be created', () => {
+    expect(component).toBeTruthy();
   });
 
   it('Is Chuck Norris Jokes', () => {

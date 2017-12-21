@@ -9,9 +9,11 @@ import { JokerService } from '../joker.service';
                 <h6>{{joke}}</h6>
                 <button id="mybtn" class="btn btn-primary btn-lg" (click)="getJoke()">Get next joke</button>
                 <button id="mybtn" class="btn btn-primary btn-lg" (click)="postJson()">Get Post</button>
+                <button id="mybtn" class="btn btn-primary btn-lg" (click)="getUsers()">Get Users</button>
               </div>
             `
 })
+
 export class JokeComponent implements OnInit {
 
   joke: string;
@@ -30,6 +32,11 @@ export class JokeComponent implements OnInit {
 
   postJson() {
     this.jokerService.postJson()
+      .subscribe(info => console.log(info));
+  }
+
+  getUsers() {
+    this.jokerService.getUsers()
       .subscribe(info => console.log(info));
   }
 }

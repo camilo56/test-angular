@@ -24,7 +24,12 @@ export class JokerService {
     const body = `title=foo&body=bar`;
 
     return this.http.post('https://jsonplaceholder.typicode.com/posts', body, this.makeHeaders())
-      .map(response => response.json().value.joke);
+      .map(response => response.json());
+  }
+
+  getUsers(): Observable<any> {
+    return this.http.get('https://jsonplaceholder.typicode.com/users')
+      .map(response => response.json());
   }
 
   makeHeaders() {

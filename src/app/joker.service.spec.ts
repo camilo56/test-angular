@@ -4,9 +4,9 @@ import { Http, Connection, ConnectionBackend, BaseRequestOptions,
         Response, ResponseOptions, HttpModule, RequestMethod} from '@angular/http';
 
 import { JokerService } from './joker.service';
-import { USERMOCK } from './mock.respose';
+import { JOKEMOCK, USERMOCK } from './mock.respose';
 
-fdescribe('JokerService', () => {
+describe('JokerService', () => {
   beforeEach(() => {
 
     /*Give jasmine the angular's context about our service*/
@@ -37,7 +37,7 @@ fdescribe('JokerService', () => {
       // Arrange
       mockBackend.connections.subscribe((connection: MockConnection) => {
         dataUrl = connection.request.url;
-        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(USERMOCK)}) ));
+        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(JOKEMOCK)}) ));
       });
       // Act
       JokerService.getJoke().subscribe(response => dataResponse = response);
@@ -46,7 +46,7 @@ fdescribe('JokerService', () => {
       // Assert
       expect(dataUrl).toEqual('http://api.icndb.com/jokes/random/');
       expect(dataResponse).toBeDefined();
-      expect(dataResponse).toEqual(USERMOCK.value.joke);
+      expect(dataResponse).toEqual(JOKEMOCK.value.joke);
     }))
   );
 
@@ -57,7 +57,7 @@ fdescribe('JokerService', () => {
       // Arrange
       mockBackend.connections.subscribe((connection: MockConnection) => {
         dataUrl = connection.request.url;
-        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(USERMOCK)}) ));
+        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(JOKEMOCK)}) ));
       });
       // Act
       JokerService.getJokeId('1991').subscribe(response => dataResponse = response);
@@ -66,7 +66,7 @@ fdescribe('JokerService', () => {
       // Assert
       expect(dataUrl).toEqual('http://api.icndb.com/jokes/random/1991');
       expect(dataResponse).toBeDefined();
-      expect(dataResponse).toEqual(USERMOCK.value.joke);
+      expect(dataResponse).toEqual(JOKEMOCK.value.joke);
     }))
   );
 
@@ -96,7 +96,7 @@ fdescribe('JokerService', () => {
       // Arrange
       mockBackend.connections.subscribe((connection: MockConnection) => {
         dataMethod = connection.request.method;
-        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(USERMOCK)}) ));
+        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(JOKEMOCK)}) ));
       });
       // Act
       JokerService.getJoke().subscribe(response => dataResponse = response);
@@ -114,7 +114,7 @@ fdescribe('JokerService', () => {
       // Arrange
       mockBackend.connections.subscribe((connection: MockConnection) => {
         dataHeader = connection.request.headers.get('API-TOKEN');
-        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(USERMOCK)}) ));
+        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(JOKEMOCK)}) ));
       });
       // Act
       JokerService.postJson().subscribe(response => dataResponse = response);
@@ -123,6 +123,29 @@ fdescribe('JokerService', () => {
       // Assert
       expect(dataHeader === null).toBeFalsy();
       expect(dataHeader).toBe('Camilo1991');
+    }))
+  );
+
+  it('Take Users',
+    inject([JokerService, MockBackend], fakeAsync((JokerService, mockBackend) => {
+
+      let dataResponse, dataUrl, dataMethod;
+      // Arrange
+      mockBackend.connections.subscribe((connection: MockConnection) => {
+        dataUrl = connection.request.url;
+        dataMethod = connection.request.method;
+        connection.mockRespond(new Response( new ResponseOptions({body: JSON.stringify(USERMOCK)}) ));
+      });
+      // Act
+      JokerService.getUsers().subscribe(response => dataResponse = response);
+      tick();
+
+      // Assert
+      expect(dataUrl).toEqual('https://jsonplaceholder.typicode.com/users');
+      expect(dataResponse).toBeDefined();
+      expect(dataMethod).toBe(RequestMethod.Get);
+      expect(dataResponse.length).toEqual(2);
+      expect(dataResponse[0].name).toEqual(USERMOCK[0].name);
     }))
   );
 
